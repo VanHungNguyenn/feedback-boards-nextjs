@@ -1,13 +1,49 @@
 'use client'
 import { useState } from 'react'
 import { FeedBackFormPopup, FeedbackItem, Button } from '@/components'
+import { IFeedback } from '@/types'
 
 export default function Home() {
-	const [showFeedbackPopup, setShowFeedbackPopup] = useState<boolean>(false)
+	const [showFeedbackPopupForm, setShowFeedbackPopupForm] =
+		useState<boolean>(false)
 
-	function openFeedbackPopup() {
-		setShowFeedbackPopup(true)
+	const [showFeedbackPopupItem, setShowFeedbackPopupItem] =
+		useState<IFeedback | null>(null)
+
+	function openFeedbackPopupForm() {
+		setShowFeedbackPopupForm(true)
 	}
+
+	function openFeedbackPopupItem(feedback: IFeedback) {
+		setShowFeedbackPopupItem(feedback)
+	}
+
+	const feedbacks = [
+		{
+			title: 'Please post more videos',
+			description:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
+			votesCount: 80,
+		},
+		{
+			title: 'Please post more videos',
+			description:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
+			votesCount: 80,
+		},
+		{
+			title: 'Please post more videos',
+			description:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
+			votesCount: 80,
+		},
+		{
+			title: 'Please post more videos',
+			description:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
+			votesCount: 80,
+		},
+	]
 
 	return (
 		<main className='bg-white max-w-2xl mx-auto shadow-lg md:rounded-lg md:mt-8 overflow-hidden'>
@@ -20,20 +56,22 @@ export default function Home() {
 			<div className='bg-gray-100 px-8 py-4 flex border-b items-center justify-between'>
 				<div className='grow'></div>
 				<div>
-					<Button primary onClick={openFeedbackPopup}>
+					<Button primary onClick={openFeedbackPopupForm}>
 						Make a suggestion
 					</Button>
 				</div>
 			</div>
 			<div className='px-8'>
-				<FeedbackItem />
-				<FeedbackItem />
-				<FeedbackItem />
-				<FeedbackItem />
-				<FeedbackItem />
+				{feedbacks.map((feedback, index) => (
+					<FeedbackItem
+						key={index}
+						{...feedback}
+						onOpen={() => openFeedbackPopupItem(feedback)}
+					/>
+				))}
 			</div>
-			{showFeedbackPopup && (
-				<FeedBackFormPopup setShow={setShowFeedbackPopup} />
+			{showFeedbackPopupForm && (
+				<FeedBackFormPopup setShow={setShowFeedbackPopupForm} />
 			)}
 		</main>
 	)
