@@ -1,6 +1,11 @@
 'use client'
 import { useState } from 'react'
-import { FeedBackFormPopup, FeedbackItem, Button } from '@/components'
+import {
+	FeedBackFormPopup,
+	FeedbackItem,
+	Button,
+	FeedbackItemPopup,
+} from '@/components'
 import { IFeedback } from '@/types'
 
 export default function Home() {
@@ -20,25 +25,25 @@ export default function Home() {
 
 	const feedbacks = [
 		{
-			title: 'Please post more videos',
+			title: 'Please post more videos 1',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
 			votesCount: 80,
 		},
 		{
-			title: 'Please post more videos',
+			title: 'Please post more videos 2',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
 			votesCount: 80,
 		},
 		{
-			title: 'Please post more videos',
+			title: 'Please post more videos 3',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
 			votesCount: 80,
 		},
 		{
-			title: 'Please post more videos',
+			title: 'Please post more videos 4',
 			description:
 				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, distinctio.',
 			votesCount: 80,
@@ -72,6 +77,12 @@ export default function Home() {
 			</div>
 			{showFeedbackPopupForm && (
 				<FeedBackFormPopup setShow={setShowFeedbackPopupForm} />
+			)}
+			{showFeedbackPopupItem && (
+				<FeedbackItemPopup
+					{...showFeedbackPopupItem}
+					setShow={setShowFeedbackPopupItem}
+				/>
 			)}
 		</main>
 	)
